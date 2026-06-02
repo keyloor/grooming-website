@@ -11,13 +11,13 @@ export function ProductList() {
         setProducts(data);
       })
       .catch((error) => {
-        console.error("Error al obtener productos:", error);
+        console.error("Error fetching products:", error);
       });
   }, []);
 
   return (
     <div>
-      <h1>Lista de productos</h1>
+      <h1>Product list</h1>
 
       {products.map((product) => (
         <div key={product.resourceId}>
