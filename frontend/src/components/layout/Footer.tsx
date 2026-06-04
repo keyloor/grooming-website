@@ -12,11 +12,11 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-2 text-slate-700 font-medium">
           <PawPrint className="w-5 h-5 text-sky-500" strokeWidth={2} />
-          PawSpa
+          Grooming
         </div>
 
         <p className="text-sm text-slate-500 text-center">
-          © 2026 PawSpa Web Application. All rights reserved.
+          © 2026 Web Application. All rights reserved.
         </p>
 
         <div className="flex items-center gap-2">

@@ -31,7 +31,7 @@ export function Header() {
           <span className="grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-r from-sky-400 to-sky-500 shadow-lg shadow-sky-500/30">
             <PawPrint className="w-5 h-5 text-white" strokeWidth={2} />
           </span>
-          PawSpa
+          Grooming
         </Link>
 
         <ul className="hidden md:flex items-center gap-1">

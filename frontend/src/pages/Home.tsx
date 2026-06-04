@@ -44,7 +44,7 @@ export function Home({ clientName }: { clientName?: string }) {
       >
         <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium text-sky-600 bg-white/55 backdrop-blur-md border border-white/60">
           <PawPrint className="w-4 h-4" strokeWidth={2} />
-          Welcome to PawSpa
+          Welcome to Grooming
         </span>
         <h1 className="mt-4 text-3xl sm:text-5xl font-bold text-slate-800">
           {clientName ? `Hello, ${clientName}! 👋` : "Hello! 👋"}

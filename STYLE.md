@@ -1,4 +1,4 @@
-# 🎨 Guía de Estilo — PawSpa
+# 🎨 Guía de Estilo
 
 Esta guía define el lenguaje visual de la aplicación. El estilo principal es **Glassmorphism** (vidrio esmerilado), con una paleta limpia basada en **celeste** y **blanco**, transmitiendo frescura, higiene y cuidado — ideal para un negocio de grooming.
 

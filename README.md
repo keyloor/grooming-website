@@ -1,4 +1,4 @@
-# 🐾 PawSpa — Sistema de Citas para Servicios de Grooming
+# 🐾 Sistema de Citas para Servicios de Grooming
 
 Aplicación web full-stack para la gestión de **citas de grooming (peluquería y cuidado de mascotas)**. Permite a los clientes reservar, consultar, actualizar y cancelar citas para los servicios disponibles, mientras que el negocio administra su catálogo de servicios, mascotas y agenda desde una interfaz moderna y responsiva.
 
@@ -42,44 +42,6 @@ Toda la información mostrada, registrada, actualizada o eliminada proviene **di
 
 ---
 
-## 🧩 Modelo de datos (mínimo 3 tablas)
-
-| Tabla        | Descripción                                              |
-|--------------|----------------------------------------------------------|
-| `users`      | Clientes del negocio (dueños de las mascotas).           |
-| `pets`       | Mascotas asociadas a un cliente.                         |
-| `services`   | Catálogo de servicios de grooming (nombre, precio, duración). |
-| `appointments` | Citas que relacionan cliente, mascota y servicio en una fecha/hora. |
-
-Cada entidad expone un `resourceId` (UUID público) para no exponer las llaves primarias internas.
-
----
-
-## 🏗️ Arquitectura
-
-El backend mantiene una arquitectura por capas, separando responsabilidades:
-
-```
-Cliente (React)
-      │  HTTP / REST
-      ▼
-Controller  →  Facade  →  Service  →  Mapper (DTO ↔ Entity)  →  Repository
-                                                                    │
-                                                              Hibernate / JPA
-                                                                    │
-                                                              MySQL
-```
-
-| Capa        | Responsabilidad                                            |
-|-------------|------------------------------------------------------------|
-| **Entity**     | Mapeo de las tablas de la base de datos.                |
-| **Repository** | Acceso a datos vía Spring Data JPA.                     |
-| **Service**    | Lógica de negocio y validaciones.                       |
-| **Facade**     | Coordinación entre servicios y mapeo de DTOs.           |
-| **Controller** | Exposición de los endpoints REST.                       |
-
----
-
 ## 🛠️ Stack Tecnológico
 
 ### Backend
@@ -109,30 +71,24 @@ Controller  →  Facade  →  Service  →  Mapper (DTO ↔ Entity)  →  Reposi
 
 ---
 
-## 🌐 API REST
-
-Operaciones CRUD expuestas (base: `/api`):
-
-| Método   | Endpoint                          | Descripción                       |
-|----------|-----------------------------------|-----------------------------------|
-| `GET`    | `/api/services`                   | Listar servicios.                 |
-| `POST`   | `/api/appointments`               | Crear una cita.                   |
-| `GET`    | `/api/appointments`               | Listar citas.                     |
-| `PUT`    | `/api/appointments/{resourceId}`  | Reprogramar una cita.             |
-| `DELETE` | `/api/appointments/{resourceId}`  | Cancelar una cita.                |
-
-> Se implementan como mínimo tres de las cuatro operaciones (GET, POST, PUT, DELETE).
-
----
-
 ## 📱 Pantallas (Frontend — Mobile First)
 
-- **Home** — bienvenida al cliente y accesos rápidos a las pantallas.
-- **Header** (obligatorio) — logo clickeable hacia Home, menú de navegación fijo, presente en todas las páginas.
-- **Footer** (obligatorio) — derechos reservados y redes sociales.
-- **Servicios** — catálogo de servicios de grooming.
-- **Citas** — listar, agendar, reprogramar y cancelar citas.
-- **Mascotas** — gestión de las mascotas del cliente.
+Funcionalidades del backlog de Jira, organizadas por pantalla:
+
+| Pantalla / Componente   | Funcionalidad                                  | Historia(s) |
+|-------------------------|------------------------------------------------|-------------|
+| **Home Screen**         | Bienvenida al cliente y accesos rápidos.       | DEV-12      |
+| **Navegación (Header/Footer)** | Header fijo con logo hacia Home + footer en todas las páginas. | DEV-11 |
+| **User Registration**   | Registro de nuevos usuarios.                   | DEV-4       |
+| **User Login**          | Inicio de sesión del usuario.                  | DEV-5       |
+| **Pet Registration**    | Registrar una nueva mascota.                   | DEV-1       |
+| **Pet List View**       | Listar las mascotas del usuario.               | DEV-2       |
+| **Pet Profile Update**  | Editar el perfil de una mascota.               | DEV-9       |
+| **Pet Deletion**        | Eliminar una mascota.                          | DEV-10      |
+| **Service List View**   | Catálogo de servicios de grooming.             | DEV-8       |
+| **Appointment Booking** | Agendar una cita.                              | DEV-3       |
+| **Appointment List View** | Listar las citas del usuario.                | DEV-6       |
+| **Appointment Cancellation** | Cancelar una cita.                        | DEV-7       |
 
 ---
 
@@ -190,4 +146,4 @@ Se implementan como mínimo **6 pruebas E2E**, cada una validando un flujo compl
 
 ---
 
-© 2026 PawSpa — Aplicación Web. Todos los derechos reservados.
+© 2026 Aplicación Web. Todos los derechos reservados.
