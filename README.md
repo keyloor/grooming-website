@@ -8,7 +8,7 @@ Aplicación web full-stack para la gestión de **citas de grooming (peluquería 
   <img src="https://img.shields.io/badge/Java-17-007396?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 17" />
   <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" alt="Spring Boot" />
   <img src="https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=hibernate&logoColor=white" alt="Hibernate" />
-  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
   <img src="https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white" alt="Maven" />
 </p>
 <p align="center">
@@ -67,7 +67,7 @@ Controller  →  Facade  →  Service  →  Mapper (DTO ↔ Entity)  →  Reposi
                                                                     │
                                                               Hibernate / JPA
                                                                     │
-                                                              PostgreSQL
+                                                              MySQL
 ```
 
 | Capa        | Responsabilidad                                            |
@@ -86,7 +86,7 @@ Controller  →  Facade  →  Service  →  Mapper (DTO ↔ Entity)  →  Reposi
 - **Java 17**
 - **Spring Boot** (Spring Web MVC, Spring Data JPA, Bean Validation)
 - **Hibernate** como ORM
-- **PostgreSQL** como gestor de base de datos
+- **MySQL** como gestor de base de datos
 - **Lombok**
 - **Maven** como gestor de dependencias
 
@@ -141,7 +141,7 @@ Operaciones CRUD expuestas (base: `/api`):
 ### Requisitos previos
 - Java 17+
 - Node.js 18+
-- PostgreSQL en ejecución
+- MySQL en ejecución
 
 ### Backend
 ```bash
