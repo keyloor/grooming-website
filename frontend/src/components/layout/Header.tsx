@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { PawPrint, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import logo from "../../assets/logo.webp";
 
 const navItems = [
   { label: "Home", to: "/" },
@@ -16,22 +17,23 @@ export function Header() {
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     `px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
       isActive
-        ? "text-sky-600 bg-white/60"
-        : "text-slate-600 hover:text-sky-600 hover:bg-white/40"
+        ? "text-brand-teal bg-white/60"
+        : "text-slate-600 hover:text-brand-teal hover:bg-white/40"
     }`;
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50 bg-white/40 backdrop-blur-xl border-b border-white/50 shadow-sm shadow-sky-500/10">
+    <header className="fixed top-0 inset-x-0 z-50 bg-white/40 backdrop-blur-xl border-b border-white/50 shadow-sm shadow-brand-teal/10">
       <nav className="mx-auto max-w-6xl px-4 sm:px-6 h-16 flex items-center justify-between">
         <Link
           to="/"
-          className="flex items-center gap-2 font-semibold text-lg text-slate-800"
+          className="flex items-center"
           onClick={() => setOpen(false)}
         >
-          <span className="grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-r from-sky-400 to-sky-500 shadow-lg shadow-sky-500/30">
-            <PawPrint className="w-5 h-5 text-white" strokeWidth={2} />
-          </span>
-          Grooming
+          <img
+            src={logo}
+            alt="Zagua Grooming"
+            className="h-12 w-auto"
+          />
         </Link>
 
         <ul className="hidden md:flex items-center gap-1">
@@ -45,7 +47,7 @@ export function Header() {
         </ul>
 
         <button
-          className="md:hidden grid place-items-center w-10 h-10 rounded-xl text-sky-600 bg-white/50 backdrop-blur-md border border-white/60"
+          className="md:hidden grid place-items-center w-10 h-10 rounded-xl text-brand-teal bg-white/50 backdrop-blur-md border border-white/60"
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Close menu" : "Open menu"}
         >

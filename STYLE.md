@@ -1,24 +1,35 @@
-# 🎨 Guía de Estilo
+# 🎨 Guía de Estilo — Zagua Grooming
 
-Esta guía define el lenguaje visual de la aplicación. El estilo principal es **Glassmorphism** (vidrio esmerilado), con una paleta limpia basada en **celeste** y **blanco**, transmitiendo frescura, higiene y cuidado — ideal para un negocio de grooming.
+Esta guía define el lenguaje visual de **Zagua Grooming**, un negocio de servicios de grooming (peluquería y cuidado de mascotas). El estilo principal es **Glassmorphism** (vidrio esmerilado), con una paleta limpia basada en **blanco**, **celeste** y **rosado** — los colores del logo — transmitiendo frescura, higiene y cuidado.
 
 **Principios rectores:**
 - **Mobile First** — diseñar primero para pantallas pequeñas y escalar hacia arriba.
 - **Glassmorphism** — superficies translúcidas, desenfoque de fondo y bordes sutiles luminosos.
 - **Aire y limpieza** — uso generoso del espacio en blanco, esquinas redondeadas y sombras suaves.
 - **Movimiento intencional** — animaciones discretas con Framer Motion que guían, no distraen.
+- **Sin emojis** — está **prohibido usar emojis** en la interfaz (texto, botones, títulos, etc.). Todos los íconos provienen **exclusivamente de Lucide (SVG)**.
 
 ---
 
 ## 🎨 Paleta de colores
 
-### Colores principales
+La paleta se deriva del **logo de Zagua Grooming**: blanco, el celeste del texto "Zagua" y el rosado del texto "Grooming".
+
+### Colores de marca (logo)
+| Rol            | Color        | HEX        | Uso                                       |
+|----------------|--------------|------------|-------------------------------------------|
+| Blanco           | White        | `#FFFFFF`  | Color base de superficies y fondo.        |
+| Celeste de marca | Zagua Teal   | `#7AD3D5`  | Color del texto "Zagua" del logo. Acentos primarios. |
+| Celeste claro    | Zagua Light  | `#B4FFFF`  | Brillo/highlight del celeste, gradientes. |
+| Rosado de marca  | Grooming Pink | `#FF76B2` | Color del texto "Grooming" del logo. Acento secundario, llamados a la acción especiales. |
+| Rosado claro     | Pink Light   | `#FFC2DC`  | Hover y detalles suaves del rosado.       |
+
+### Colores principales (UI)
 | Rol            | Color        | HEX        | Uso                                       |
 |----------------|--------------|------------|-------------------------------------------|
 | Celeste primario | Sky          | `#38BDF8`  | Acentos, botones, enlaces, elementos activos. |
 | Celeste claro    | Sky Light    | `#7DD3FC`  | Hover, gradientes, detalles.              |
 | Celeste profundo | Sky Deep     | `#0EA5E9`  | Texto sobre claro, énfasis, focus.        |
-| Blanco           | White        | `#FFFFFF`  | Color base de superficies y texto invertido. |
 | Blanco hueso     | Off White    | `#F8FAFC`  | Fondo de la app.                          |
 
 ### Colores de apoyo
@@ -197,6 +208,8 @@ import { motion } from "framer-motion";
 ## 🔣 Iconografía (Lucide React)
 
 Todos los SVG provienen de **`lucide-react`**. Estilo de línea fino y consistente.
+
+> ⛔ **Regla estricta:** queda **prohibido el uso de emojis** en cualquier parte de la interfaz. Todo símbolo o ícono debe ser un componente de Lucide. Si un emoji parece necesario, existe un ícono equivalente en Lucide.
 
 ```tsx
 import { PawPrint, Calendar, Scissors, Bath, Clock, User } from "lucide-react";

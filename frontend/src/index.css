@@ -1,6 +1,13 @@
 @import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
+@theme {
+  --color-brand-teal: #7ad3d5;
+  --color-brand-teal-light: #b4ffff;
+  --color-brand-pink: #ff76b2;
+  --color-brand-pink-light: #ffc2dc;
+}
+
 :root {
   font-family: "Poppins", system-ui, sans-serif;
 }
@@ -9,6 +16,6 @@ body {
   margin: 0;
   min-height: 100vh;
   color: #0f172a;
-  background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 50%, #f0f9ff 100%);
+  background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 50%, #ffeef6 100%);
   background-attachment: fixed;
 }

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Scissors, Calendar, PawPrint, ArrowRight } from "lucide-react";
+import logo from "../assets/logo.webp";
 
 const quickLinks = [
   {
@@ -42,12 +43,17 @@ export function Home({ clientName }: { clientName?: string }) {
         transition={{ duration: 0.4, ease: "easeOut" }}
         className="text-center max-w-2xl mx-auto"
       >
-        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium text-sky-600 bg-white/55 backdrop-blur-md border border-white/60">
+        <img
+          src={logo}
+          alt="Zagua Grooming"
+          className="mx-auto w-40 sm:w-52 drop-shadow-xl"
+        />
+        <span className="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium text-brand-teal bg-white/55 backdrop-blur-md border border-white/60">
           <PawPrint className="w-4 h-4" strokeWidth={2} />
-          Welcome to Grooming
+          Welcome to Zagua Grooming
         </span>
         <h1 className="mt-4 text-3xl sm:text-5xl font-bold text-slate-800">
-          {clientName ? `Hello, ${clientName}! 👋` : "Hello! 👋"}
+          {clientName ? `Hello, ${clientName}!` : "Hello!"}
         </h1>
         <p className="mt-4 text-slate-500 text-base sm:text-lg">
           Pamper your pet with the best grooming services. Book your appointment
@@ -55,7 +61,7 @@ export function Home({ clientName }: { clientName?: string }) {
         </p>
         <Link
           to="/appointments"
-          className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-white bg-gradient-to-r from-sky-400 to-sky-500 shadow-lg shadow-sky-500/30 hover:from-sky-500 hover:to-sky-600 transition-all duration-200 active:scale-95"
+          className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-white bg-gradient-to-r from-brand-teal to-brand-pink shadow-lg shadow-brand-pink/30 hover:opacity-90 transition-all duration-200 active:scale-95"
         >
           Book appointment
           <ArrowRight className="w-5 h-5" />
@@ -72,14 +78,14 @@ export function Home({ clientName }: { clientName?: string }) {
           <motion.div key={to} variants={item} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
             <Link
               to={to}
-              className="block h-full bg-white/55 backdrop-blur-xl border border-white/60 rounded-2xl shadow-lg shadow-sky-500/15 p-6 hover:shadow-xl transition-all duration-300"
+              className="block h-full bg-white/55 backdrop-blur-xl border border-white/60 rounded-2xl shadow-lg shadow-brand-teal/15 p-6 hover:shadow-xl transition-all duration-300"
             >
-              <span className="grid place-items-center w-12 h-12 rounded-xl bg-gradient-to-r from-sky-400 to-sky-500 shadow-lg shadow-sky-500/30">
+              <span className="grid place-items-center w-12 h-12 rounded-xl bg-gradient-to-br from-brand-teal to-brand-pink shadow-lg shadow-brand-pink/30">
                 <Icon className="w-6 h-6 text-white" strokeWidth={1.75} />
               </span>
               <h3 className="mt-4 text-lg font-semibold text-slate-800">{title}</h3>
               <p className="mt-1 text-sm text-slate-500">{description}</p>
-              <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-sky-600">
+              <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-brand-teal">
                 Go <ArrowRight className="w-4 h-4" />
               </span>
             </Link>
