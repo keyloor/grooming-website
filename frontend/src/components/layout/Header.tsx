@@ -5,10 +5,10 @@ import { Menu, X } from "lucide-react";
 import logo from "../../assets/logo.webp";
 
 const navItems = [
-  { label: "Home", to: "/" },
-  { label: "Services", to: "/services" },
-  { label: "Appointments", to: "/appointments" },
-  { label: "Pets", to: "/pets" },
+  { label: "Inicio", to: "/" },
+  { label: "Servicios", to: "/services" },
+  { label: "Citas", to: "/appointments" },
+  { label: "Mascotas", to: "/pets" },
 ];
 
 export function Header() {
@@ -49,7 +49,7 @@ export function Header() {
         <button
           className="md:hidden grid place-items-center w-10 h-10 rounded-xl text-brand-teal bg-white/50 backdrop-blur-md border border-white/60"
           onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Close menu" : "Open menu"}
+          aria-label={open ? "Cerrar menú" : "Abrir menú"}
         >
           {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>

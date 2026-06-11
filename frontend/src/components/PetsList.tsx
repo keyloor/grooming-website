@@ -16,7 +16,7 @@ export function PetsList() {
   useEffect(() => {
     getPets()
       .then((data) => setPets(data))
-      .catch((err) => setError(err instanceof Error ? err.message : "Unknown error"))
+      .catch((err) => setError(err instanceof Error ? err.message : "Error desconocido"))
       .finally(() => setLoading(false));
   }, []);
 
@@ -36,9 +36,9 @@ export function PetsList() {
       const updated = await updatePets(id, { ...editForm, ownerId });
       setPets((prev) => prev.map((p) => (p.id === id ? { ...p, ...updated } : p)));
       setEditingId(null);
-      showSuccess("Pet updated successfully!");
+      showSuccess("¡Mascota actualizada con éxito!");
     } catch {
-      setError("Failed to update pet.");
+      setError("No se pudo actualizar la mascota.");
     }
   };
 
@@ -47,17 +47,17 @@ export function PetsList() {
       await deletePets(id);
       setPets((prev) => prev.filter((p) => p.id !== id));
       setDeleteConfirmId(null);
-      showSuccess("Pet deleted successfully!");
+      showSuccess("¡Mascota eliminada con éxito!");
     } catch {
-      setError("Failed to delete pet.");
+      setError("No se pudo eliminar la mascota.");
     }
   };
 
   return (
     <section className="py-10 sm:py-16">
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-        <h1 className="text-3xl sm:text-4xl font-bold text-slate-800">My Pets</h1>
-        <p className="mt-2 text-slate-500">Manage your pets' profiles.</p>
+        <h1 className="text-3xl sm:text-4xl font-bold text-slate-800">Mis Mascotas</h1>
+        <p className="mt-2 text-slate-500">Administra los perfiles de tus mascotas.</p>
       </motion.div>
 
       <AnimatePresence>
@@ -77,7 +77,7 @@ export function PetsList() {
       {loading && (
         <div className="mt-10 flex items-center gap-2 text-slate-500">
           <Loader2 className="w-5 h-5 animate-spin" />
-          Loading pets...
+          Cargando mascotas...
         </div>
       )}
 
@@ -90,7 +90,7 @@ export function PetsList() {
 
       {!loading && !error && pets.length === 0 && (
         <div className="mt-10 text-slate-500 bg-white/55 backdrop-blur-xl border border-white/60 rounded-2xl px-4 py-3">
-          No pets found.
+          No se encontraron mascotas.
         </div>
       )}
 
@@ -130,20 +130,20 @@ export function PetsList() {
               <div className="mt-4 flex flex-col gap-2">
                 <input
                   className="rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-teal"
-                  placeholder="Name *"
+                  placeholder="Nombre *"
                   value={editForm.name}
                   onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
                 />
                 <input
                   type="number"
                   className="rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-teal"
-                  placeholder="Age *"
+                  placeholder="Edad *"
                   value={editForm.age}
                   onChange={(e) => setEditForm({ ...editForm, age: Number(e.target.value) })}
                 />
                 <input
                   className="rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-teal"
-                  placeholder="Notes"
+                  placeholder="Notas"
                   value={editForm.notes}
                   onChange={(e) => setEditForm({ ...editForm, notes: e.target.value })}
                 />
@@ -152,21 +152,21 @@ export function PetsList() {
                     onClick={() => handleEditSave(pet.id, pet.ownerId)}
                     className="flex-1 py-2 rounded-xl bg-gradient-to-r from-brand-teal to-brand-pink text-white text-sm font-medium hover:opacity-90 transition-opacity"
                   >
-                    Save
+                    Guardar
                   </button>
                   <button
                     onClick={() => setEditingId(null)}
                     className="flex-1 py-2 rounded-xl border border-slate-200 text-slate-500 text-sm hover:bg-slate-50 transition-colors"
                   >
-                    Cancel
+                    Cancelar
                   </button>
                 </div>
               </div>
             ) : (
               <div className="mt-4">
                 <h3 className="text-lg font-semibold text-slate-800">{pet.name}</h3>
-                <p className="text-sm text-slate-500">Breed: {pet.breedName ?? "—"}</p>
-                <p className="text-sm text-slate-500">Age: {pet.age} years</p>
+                <p className="text-sm text-slate-500">Raza: {pet.breedName ?? "—"}</p>
+                <p className="text-sm text-slate-500">Edad: {pet.age} años</p>
                 {pet.notes && <p className="mt-1 text-sm text-slate-400 italic">{pet.notes}</p>}
               </div>
             )}
@@ -179,19 +179,19 @@ export function PetsList() {
                   exit={{ opacity: 0 }}
                   className="mt-4 p-3 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700"
                 >
-                  <p className="font-medium">Delete this pet?</p>
+                  <p className="font-medium">¿Eliminar esta mascota?</p>
                   <div className="flex gap-2 mt-2">
                     <button
                       onClick={() => handleDelete(pet.id)}
                       className="flex-1 py-1.5 rounded-lg bg-red-500 text-white text-sm font-medium hover:bg-red-600 transition-colors"
                     >
-                      Yes, delete
+                      Sí, eliminar
                     </button>
                     <button
                       onClick={() => setDeleteConfirmId(null)}
                       className="flex-1 py-1.5 rounded-lg border border-red-200 text-red-500 text-sm hover:bg-red-100 transition-colors"
                     >
-                      Cancel
+                      Cancelar
                     </button>
                   </div>
                 </motion.div>

@@ -12,7 +12,7 @@ export function ProductList() {
   useEffect(() => {
     getProducts()
       .then((data) => setProducts(data))
-      .catch((err) => setError(err instanceof Error ? err.message : "Unknown error"))
+      .catch((err) => setError(err instanceof Error ? err.message : "Error desconocido"))
       .finally(() => setLoading(false));
   }, []);
 
@@ -23,27 +23,27 @@ export function ProductList() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
       >
-        <h1 className="text-3xl sm:text-4xl font-bold text-slate-800">Services</h1>
-        <p className="mt-2 text-slate-500">Grooming services available right now.</p>
+        <h1 className="text-3xl sm:text-4xl font-bold text-slate-800">Servicios</h1>
+        <p className="mt-2 text-slate-500">Servicios de grooming disponibles ahora mismo.</p>
       </motion.div>
 
       {loading && (
         <div className="mt-10 flex items-center gap-2 text-slate-500">
           <Loader2 className="w-5 h-5 animate-spin" />
-          Loading services...
+          Cargando servicios...
         </div>
       )}
 
       {error && (
         <div className="mt-10 flex items-center gap-2 text-red-600 bg-white/55 backdrop-blur-xl border border-white/60 rounded-2xl px-4 py-3">
           <AlertCircle className="w-5 h-5" />
-          <span>Couldn't load services: {error}</span>
+          <span>No se pudieron cargar los servicios: {error}</span>
         </div>
       )}
 
       {!loading && !error && products.length === 0 && (
         <div className="mt-10 text-slate-500 bg-white/55 backdrop-blur-xl border border-white/60 rounded-2xl px-4 py-3">
-          No services yet. Create one with POST <code>/api/products</code>.
+          Aún no hay servicios. Crea uno con POST <code>/api/products</code>.
         </div>
       )}
 

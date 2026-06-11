@@ -14,7 +14,7 @@ export function Footer() {
         <img src={logo} alt="Zagua Grooming" className="h-14 w-auto" />
 
         <p className="text-sm text-slate-500 text-center">
-          © 2026 Web Application. All rights reserved.
+          © 2026 Aplicación Web. Todos los derechos reservados.
         </p>
 
         <div className="flex items-center gap-2">

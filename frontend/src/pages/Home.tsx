@@ -5,20 +5,20 @@ import logo from "../assets/logo.webp";
 
 const quickLinks = [
   {
-    title: "Appointments",
-    description: "Book, reschedule or cancel your appointments.",
+    title: "Citas",
+    description: "Agenda, reprograma o cancela tus citas.",
     icon: Calendar,
     to: "/appointments",
   },
   {
-    title: "Pets",
-    description: "Manage your pets' profiles.",
+    title: "Mascotas",
+    description: "Administra los perfiles de tus mascotas.",
     icon: PawPrint,
     to: "/pets",
   },
   {
-    title: "Services",
-    description: "Browse baths, haircuts and grooming packages.",
+    title: "Servicios",
+    description: "Explora baños, cortes y paquetes de grooming.",
     icon: Scissors,
     to: "/services",
   },
@@ -52,22 +52,22 @@ export function Home({ clientName }: { clientName?: string }) {
 
         <span className="mt-6 inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium text-brand-teal bg-brand-teal/10 border border-brand-teal/20">
           <PawPrint className="w-4 h-4" strokeWidth={2} />
-          Welcome to Zagua Grooming
+          Bienvenido a Zagua Grooming
         </span>
 
         <h1 className="mt-4 text-3xl sm:text-5xl font-bold text-slate-800 tracking-tight">
           {clientName ? (
             <>
-              Hello, <span className="text-brand-teal">{clientName}</span>
+              Hola, <span className="text-brand-teal">{clientName}</span>
             </>
           ) : (
-            "Welcome back"
+            "Bienvenido de nuevo"
           )}
         </h1>
 
         <p className="mt-4 text-slate-500 text-base sm:text-lg">
-          Pamper your pet with the best grooming services. Book your next
-          appointment in seconds.
+          Consiente a tu mascota con los mejores servicios de grooming. Agenda
+          tu próxima cita en segundos.
         </p>
 
         <div className="mt-7 flex flex-col sm:flex-row gap-3">
@@ -76,13 +76,13 @@ export function Home({ clientName }: { clientName?: string }) {
             className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-white bg-brand-teal shadow-lg shadow-brand-teal/30 hover:bg-[#5fc4c6] transition-all duration-200 active:scale-95"
           >
             <Calendar className="w-5 h-5" strokeWidth={1.75} />
-            Book appointment
+            Agendar cita
           </Link>
           <Link
             to="/services"
             className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-brand-teal bg-white/55 backdrop-blur-md border border-white/60 hover:bg-white/75 transition-all duration-200"
           >
-            View services
+            Ver servicios
             <ArrowRight className="w-5 h-5" strokeWidth={1.75} />
           </Link>
         </div>
@@ -91,7 +91,7 @@ export function Home({ clientName }: { clientName?: string }) {
       {/* Quick access */}
       <div className="mt-12 sm:mt-16">
         <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400">
-          Quick access
+          Acceso rápido
         </h2>
 
         <motion.div
@@ -121,7 +121,7 @@ export function Home({ clientName }: { clientName?: string }) {
                   {description}
                 </p>
                 <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-brand-teal">
-                  Go
+                  Ir
                   <ArrowRight
                     className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
                     strokeWidth={1.75}
