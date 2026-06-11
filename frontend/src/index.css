@@ -6,6 +6,7 @@
   --color-brand-teal-light: #b4ffff;
   --color-brand-pink: #ff76b2;
   --color-brand-pink-light: #ffc2dc;
+  --color-brand-pink-deep: #db2777;
 }
 
 :root {
@@ -16,10 +17,10 @@ body {
   margin: 0;
   min-height: 100vh;
   color: #0f172a;
-  /* Fondo sobrio: base off-white con un velo teal muy sutil en la parte superior.
+  /* Fondo sobrio: base off-white con un velo rosado muy sutil en la parte superior.
      Mantiene el efecto glass (algo que desenfocar) sin el degradado "cotton candy". */
   background:
-    radial-gradient(1100px 520px at 50% -12%, rgba(122, 211, 213, 0.18) 0%, rgba(122, 211, 213, 0) 60%),
+    radial-gradient(1100px 520px at 50% -12%, rgba(255, 118, 178, 0.14) 0%, rgba(255, 118, 178, 0) 60%),
     #f6f8fa;
   background-attachment: fixed;
 }

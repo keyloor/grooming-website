@@ -50,7 +50,7 @@ export function Home({ clientName }: { clientName?: string }) {
           className="w-28 sm:w-32 drop-shadow-sm"
         />
 
-        <span className="mt-6 inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium text-brand-teal bg-brand-teal/10 border border-brand-teal/20">
+        <span className="mt-6 inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium text-brand-pink-deep bg-brand-pink/10 border border-brand-pink/25">
           <PawPrint className="w-4 h-4" strokeWidth={2} />
           Bienvenido a Zagua Grooming
         </span>
@@ -58,7 +58,7 @@ export function Home({ clientName }: { clientName?: string }) {
         <h1 className="mt-4 text-3xl sm:text-5xl font-bold text-slate-800 tracking-tight">
           {clientName ? (
             <>
-              Hola, <span className="text-brand-teal">{clientName}</span>
+              Hola, <span className="text-brand-pink-deep">{clientName}</span>
             </>
           ) : (
             "Bienvenido de nuevo"
@@ -73,14 +73,14 @@ export function Home({ clientName }: { clientName?: string }) {
         <div className="mt-7 flex flex-col sm:flex-row gap-3">
           <Link
             to="/appointments"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-white bg-brand-teal shadow-lg shadow-brand-teal/30 hover:bg-[#5fc4c6] transition-all duration-200 active:scale-95"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-white bg-brand-pink shadow-lg shadow-brand-pink/35 hover:bg-brand-pink-deep transition-all duration-200 active:scale-95"
           >
             <Calendar className="w-5 h-5" strokeWidth={1.75} />
             Agendar cita
           </Link>
           <Link
             to="/services"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-brand-teal bg-white/55 backdrop-blur-md border border-white/60 hover:bg-white/75 transition-all duration-200"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-brand-pink-deep bg-white/55 backdrop-blur-md border border-brand-pink/30 hover:bg-white/80 transition-all duration-200"
           >
             Ver servicios
             <ArrowRight className="w-5 h-5" strokeWidth={1.75} />
@@ -109,9 +109,9 @@ export function Home({ clientName }: { clientName?: string }) {
             >
               <Link
                 to={to}
-                className="group flex flex-col h-full bg-white/55 backdrop-blur-xl border border-white/60 rounded-2xl shadow-lg shadow-brand-teal/15 p-6 hover:shadow-xl transition-all duration-300"
+                className="group flex flex-col h-full bg-white/55 backdrop-blur-xl border border-white/60 rounded-2xl shadow-lg shadow-brand-pink/15 p-6 hover:shadow-xl transition-all duration-300"
               >
-                <span className="grid place-items-center w-12 h-12 rounded-xl bg-brand-teal/12 text-brand-teal">
+                <span className="grid place-items-center w-12 h-12 rounded-xl bg-brand-pink/12 text-brand-pink-deep">
                   <Icon className="w-6 h-6" strokeWidth={1.75} />
                 </span>
                 <h3 className="mt-4 text-lg font-semibold text-slate-800">
@@ -120,7 +120,7 @@ export function Home({ clientName }: { clientName?: string }) {
                 <p className="mt-1 text-sm text-slate-500 flex-1">
                   {description}
                 </p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-brand-teal">
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-brand-pink-deep">
                   Ir
                   <ArrowRight
                     className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"

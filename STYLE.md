@@ -6,7 +6,7 @@ Esta guía define el lenguaje visual de **Zagua Grooming**, un negocio de servic
 - **Mobile First** — diseñar primero para pantallas pequeñas y escalar hacia arriba.
 - **Glassmorphism** — superficies translúcidas, desenfoque de fondo y bordes sutiles luminosos.
 - **Aire y limpieza** — uso generoso del espacio en blanco, esquinas redondeadas y sombras suaves.
-- **Color contenido** — el fondo es sobrio (blanco/off-white con un velo teal sutil). El **celeste (teal) es el acento principal** y el **rosado se usa con moderación**, solo como acento puntual. Se **evita el degradado celeste↔rosado tipo "cotton candy"** como fondo o como relleno por defecto de botones e íconos.
+- **Color contenido** — el fondo es sobrio (blanco/off-white con un velo rosado sutil). El **rosado es el acento principal** (botones, CTAs, enlaces, resaltados, íconos) porque tiene mejor contraste sobre blanco; el **celeste (teal) es de apoyo** (es muy claro y pierde legibilidad sobre blanco, así que se reserva para fondos/detalles, no para texto pequeño). Se **evita el degradado celeste↔rosado tipo "cotton candy"** como fondo o como relleno por defecto de botones e íconos.
 - **Movimiento intencional** — animaciones discretas con Framer Motion que guían, no distraen.
 - **Sin emojis** — está **prohibido usar emojis** en la interfaz (texto, botones, títulos, etc.). Todos los íconos provienen **exclusivamente de Lucide (SVG)**.
 
@@ -20,21 +20,23 @@ La paleta se deriva del **logo de Zagua Grooming**: blanco, el celeste del texto
 | Rol            | Color        | HEX        | Uso                                       |
 |----------------|--------------|------------|-------------------------------------------|
 | Blanco           | White        | `#FFFFFF`  | Color base de superficies y fondo.        |
-| Celeste de marca | Zagua Teal   | `#7AD3D5`  | Color del texto "Zagua" del logo. Acentos primarios. |
+| Celeste de marca | Zagua Teal   | `#7AD3D5`  | Color del texto "Zagua" del logo. Acento de apoyo (rellenos/detalles, no texto). |
 | Celeste claro    | Zagua Light  | `#B4FFFF`  | Brillo/highlight del celeste, gradientes. |
-| Rosado de marca  | Grooming Pink | `#FF76B2` | Color del texto "Grooming" del logo. Acento secundario, llamados a la acción especiales. |
+| Rosado de marca  | Grooming Pink | `#FF76B2` | Color del texto "Grooming" del logo. **Acento principal**: relleno de botones, íconos, badges, sombras teñidas. |
+| Rosado profundo  | Pink Deep    | `#DB2777`  | Versión legible del rosado para **texto y enlaces sobre blanco** (el `#FF76B2` no pasa contraste como texto). |
 | Rosado claro     | Pink Light   | `#FFC2DC`  | Hover y detalles suaves del rosado.       |
 
 Tokens disponibles en Tailwind (definidos en `index.css` con `@theme`):
-`brand-teal` `#7AD3D5`, `brand-teal-light` `#B4FFFF`, `brand-pink` `#FF76B2`, `brand-pink-light` `#FFC2DC`.
+`brand-pink` `#FF76B2`, `brand-pink-deep` `#DB2777`, `brand-pink-light` `#FFC2DC`, `brand-teal` `#7AD3D5`, `brand-teal-light` `#B4FFFF`.
 
 ### Reparto del color (jerarquía)
-| Rol               | Token / HEX            | Uso                                                          |
-|-------------------|------------------------|--------------------------------------------------------------|
-| Acento principal  | `brand-teal` `#7AD3D5` | Botones primarios, enlaces, íconos, estados activos, sombras teñidas. |
-| Acento puntual    | `brand-pink` `#FF76B2` | **Solo con moderación**: 1 elemento destacado por vista (un badge, un dato clave, un detalle de hover). Nunca como relleno por defecto. |
-| Fondo de app      | Off White `#F6F8FA`    | Base sobria con un velo teal muy sutil arriba (ver abajo).   |
-| Superficie glass  | `white/55`             | Tarjetas, header, footer, modales.                           |
+| Rol               | Token / HEX                  | Uso                                                          |
+|-------------------|------------------------------|--------------------------------------------------------------|
+| Acento principal  | `brand-pink` `#FF76B2`       | Relleno de botones primarios, íconos, badges, sombras teñidas. |
+| Texto/enlace acento | `brand-pink-deep` `#DB2777` | Texto y enlaces de acento sobre blanco (versión legible del rosado). |
+| Apoyo             | `brand-teal` `#7AD3D5`       | Detalles, fondos suaves, acentos secundarios. **No** para texto pequeño (poco contraste). |
+| Fondo de app      | Off White `#F6F8FA`          | Base sobria con un velo rosado muy sutil arriba (ver abajo). |
+| Superficie glass  | `white/55`                   | Tarjetas, header, footer, modales.                           |
 
 ### Colores de apoyo
 | Rol            | HEX        | Uso                                  |
@@ -46,10 +48,10 @@ Tokens disponibles en Tailwind (definidos en `index.css` con `@theme`):
 | Advertencia      | `#F59E0B`  | Avisos.                              |
 
 ### Fondo de la app (sobrio)
-Base off-white con un velo teal sutil; **sin** el degradado celeste↔rosado. El glass necesita algo que desenfocar, pero el fondo debe ser tranquilo y no competir con el contenido:
+Base off-white con un velo rosado sutil; **sin** el degradado celeste↔rosado. El glass necesita algo que desenfocar, pero el fondo debe ser tranquilo y no competir con el contenido:
 ```css
 background:
-  radial-gradient(1100px 520px at 50% -12%, rgba(122, 211, 213, 0.18) 0%, rgba(122, 211, 213, 0) 60%),
+  radial-gradient(1100px 520px at 50% -12%, rgba(255, 118, 178, 0.14) 0%, rgba(255, 118, 178, 0) 60%),
   #f6f8fa;
 ```
 
@@ -68,13 +70,13 @@ Las tarjetas, modales, el header y los paneles usan superficies de vidrio. Recet
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 1.25rem;
-  box-shadow: 0 8px 32px rgba(122, 211, 213, 0.18);
+  box-shadow: 0 8px 32px rgba(255, 118, 178, 0.18);
 }
 ```
 
 Con clases de Tailwind:
 ```html
-<div class="bg-white/55 backdrop-blur-xl border border-white/60 rounded-2xl shadow-lg shadow-brand-teal/15">
+<div class="bg-white/55 backdrop-blur-xl border border-white/60 rounded-2xl shadow-lg shadow-brand-pink/15">
   ...
 </div>
 ```
@@ -84,7 +86,7 @@ Con clases de Tailwind:
 - Opacidad de fondo entre `0.4` y `0.6`.
 - Desenfoque entre `12px` y `20px`.
 - Borde claro semitransparente (`white/40`–`white/60`) para simular el filo del vidrio.
-- Sombra teñida de teal (`shadow-brand-teal/15`), nunca negra dura.
+- Sombra teñida de rosado (`shadow-brand-pink/15`), nunca negra dura.
 
 ---
 
@@ -119,8 +121,8 @@ Con clases de Tailwind:
 ### Botón primario (sólido)
 ```html
 <button class="px-6 py-3 rounded-xl font-medium text-white
-               bg-brand-teal shadow-lg shadow-brand-teal/30
-               hover:bg-[#5fc4c6]
+               bg-brand-pink shadow-lg shadow-brand-pink/35
+               hover:bg-brand-pink-deep
                transition-all duration-200 active:scale-95">
   Agendar cita
 </button>
@@ -128,9 +130,9 @@ Con clases de Tailwind:
 
 ### Botón secundario (glass)
 ```html
-<button class="px-6 py-3 rounded-xl font-medium text-brand-teal
-               bg-white/50 backdrop-blur-md border border-white/60
-               hover:bg-white/70 transition-all duration-200">
+<button class="px-6 py-3 rounded-xl font-medium text-brand-pink-deep
+               bg-white/55 backdrop-blur-md border border-brand-pink/30
+               hover:bg-white/80 transition-all duration-200">
   Cancelar
 </button>
 ```
@@ -138,7 +140,7 @@ Con clases de Tailwind:
 ### Tarjeta de servicio (glass)
 ```html
 <div class="bg-white/55 backdrop-blur-xl border border-white/60
-            rounded-2xl shadow-lg shadow-brand-teal/15 p-6
+            rounded-2xl shadow-lg shadow-brand-pink/15 p-6
             hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
   ...
 </div>
@@ -147,7 +149,7 @@ Con clases de Tailwind:
 ### Tile de ícono (sólido, tono suave)
 ```html
 <span class="grid place-items-center w-12 h-12 rounded-xl
-             bg-brand-teal/12 text-brand-teal">
+             bg-brand-pink/12 text-brand-pink-deep">
   <Scissors class="w-6 h-6" strokeWidth="1.75" />
 </span>
 ```
@@ -157,7 +159,7 @@ Con clases de Tailwind:
 <input class="w-full px-4 py-3 rounded-xl
               bg-white/60 backdrop-blur-md border border-white/60
               text-slate-800 placeholder:text-slate-400
-              focus:outline-none focus:ring-2 focus:ring-brand-teal
+              focus:outline-none focus:ring-2 focus:ring-brand-pink
               transition-all duration-200" />
 ```
 
@@ -165,7 +167,7 @@ Con clases de Tailwind:
 ```html
 <header class="fixed top-0 inset-x-0 z-50
                bg-white/40 backdrop-blur-xl border-b border-white/50
-               shadow-sm shadow-brand-teal/10">
+               shadow-sm shadow-brand-pink/10">
   ...
 </header>
 ```
@@ -230,21 +232,21 @@ Todos los SVG provienen de **`lucide-react`**. Estilo de línea fino y consisten
 ```tsx
 import { PawPrint, Calendar, Scissors, Bath, Clock, User } from "lucide-react";
 
-<Scissors className="w-5 h-5 text-brand-teal" strokeWidth={1.75} />
+<Scissors className="w-5 h-5 text-brand-pink-deep" strokeWidth={1.75} />
 ```
 
 **Convenciones:**
 - Tamaños: `w-4 h-4` (inline), `w-5 h-5` (botones), `w-6 h-6` (navegación).
 - `strokeWidth` entre `1.5` y `2`.
-- Color por defecto: celeste (`text-brand-teal`) o heredado del texto.
+- Color por defecto: rosado (`text-brand-pink-deep`) o heredado del texto.
 - Iconos sugeridos por dominio: `PawPrint`, `Scissors`, `Bath`, `Calendar`, `Clock`, `User`, `Dog`, `Cat`.
 
 ---
 
 ## ♿ Accesibilidad
 
-- Contraste mínimo **AA**: el `brand-teal` (`#7AD3D5`) es claro; para **texto** sobre blanco usa un teal más oscuro (p. ej. `#0E7C7E`) o `text-slate-700`. Reserva `brand-teal` para íconos, fondos y bordes.
-- Estados de `focus` siempre visibles (`focus:ring-2 ring-brand-teal`).
+- Contraste mínimo **AA**: para **texto** de acento sobre blanco usa `brand-pink-deep` (`#DB2777`), no `brand-pink` (`#FF76B2`) ni `brand-teal` (`#7AD3D5`), que son demasiado claros. Reserva `brand-pink`/`brand-teal` para rellenos, íconos, fondos y bordes.
+- Estados de `focus` siempre visibles (`focus:ring-2 ring-brand-pink`).
 - Áreas táctiles de al menos `44×44px` en móvil.
 - Texto alternativo en imágenes y `aria-label` en botones de solo icono.
 
