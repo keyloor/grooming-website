@@ -1,10 +1,38 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import logo from "../assets/logo.webp";
+import { signupOwner } from "../services/OwnersService";
 
 export function Login() {
   const [tab, setTab] = useState<"login" | "signup">("login");
   const isSignup = tab === "signup";
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setMessage(null);
+    setError(null);
+
+    if (isSignup) {
+      try {
+        const newOwner = await signupOwner({ name, email, phone, password });
+        setMessage(`Cuenta creada: ${newOwner.name}`);
+        setName("");
+        setEmail("");
+        setPassword("");
+        setPhone("");
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Error al crear la cuenta");
+      }
+    } else {
+      setMessage("Funcionalidad de inicio de sesión aún no implementada.");
+    }
+  };
 
   return (
     <motion.section
@@ -24,9 +52,9 @@ export function Login() {
           : "Iniciá sesión para ver tus citas."}
       </p>
 
-      {/* Tabs */}
       <div className="mt-5 w-full bg-teal-mist rounded-full p-1 flex gap-1">
         <button
+          type="button"
           onClick={() => setTab("login")}
           className={`flex-1 rounded-full py-2.5 text-sm font-bold transition-all ${
             !isSignup ? "bg-surface text-teal-deep shadow-sm" : "text-ink-soft"
@@ -35,6 +63,7 @@ export function Login() {
           Iniciar sesión
         </button>
         <button
+          type="button"
           onClick={() => setTab("signup")}
           className={`flex-1 rounded-full py-2.5 text-sm font-bold transition-all ${
             isSignup ? "bg-surface text-teal-deep shadow-sm" : "text-ink-soft"
@@ -44,31 +73,33 @@ export function Login() {
         </button>
       </div>
 
-      {/* Form (placeholder, no submite a backend) */}
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-        className="mt-5 w-full flex flex-col gap-3"
-      >
+      <form onSubmit={handleSubmit} className="mt-5 w-full flex flex-col gap-3">
         {isSignup && (
           <>
             <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               placeholder="Tu nombre"
               className="rounded-2xl border border-line bg-surface px-4 py-3.5 text-sm focus:outline-none focus:border-teal"
             />
             <input
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               placeholder="Teléfono (para WhatsApp)"
               className="rounded-2xl border border-line bg-surface px-4 py-3.5 text-sm focus:outline-none focus:border-teal"
             />
           </>
         )}
         <input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           type="email"
           placeholder="Correo electrónico"
           className="rounded-2xl border border-line bg-surface px-4 py-3.5 text-sm focus:outline-none focus:border-teal"
         />
         <input
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           type="password"
           placeholder="Contraseña"
           className="rounded-2xl border border-line bg-surface px-4 py-3.5 text-sm focus:outline-none focus:border-teal"
@@ -85,15 +116,13 @@ export function Login() {
         >
           {isSignup ? "Crear cuenta" : "Iniciar sesión"}
         </button>
-        {!isSignup && (
-          <button type="button" className="text-ink-soft text-xs font-semibold py-1 hover:underline">
-            Olvidé mi contraseña
-          </button>
-        )}
       </form>
 
+      {message && <p className="mt-4 text-sm text-teal-deep">{message}</p>}
+      {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+
       <p className="mt-4 text-[11px] text-ink-faint text-center">
-        (Pantalla de demo — sin autenticación real conectada todavía.)
+        {isSignup ? "Registro conectado al backend." : "Inicio de sesión aún no implementado."}
       </p>
     </motion.section>
   );

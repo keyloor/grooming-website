@@ -32,6 +32,9 @@ public class Owners {
     @Column(name = "email", length = 100, nullable = false, unique = true)
     private String email;
 
+    @Column(name = "phone", length = 50, nullable = false)
+    private String phone;
+
     @Column(name = "password", length = 255)
     private String password;
 }

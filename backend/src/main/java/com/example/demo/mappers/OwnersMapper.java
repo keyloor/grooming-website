@@ -20,7 +20,8 @@ public class OwnersMapper {
         return new OwnersDto(
                 owners.getId(),
                 owners.getName(),
-                owners.getEmail());
+                owners.getEmail(),
+                owners.getPhone());
     }
 
     public List<OwnersDto> toOwnersDtoList(List<Owners> ownersList) {
@@ -37,7 +38,8 @@ public class OwnersMapper {
         return new OwnersResponseModel(
                 dto.id(),
                 dto.name(),
-                dto.email());
+                dto.email(),
+                dto.phone());
     }
 
     public List<OwnersResponseModel> toOwnersResponseModelList(List<OwnersDto> dtos) {
@@ -54,6 +56,7 @@ public class OwnersMapper {
         OwnersRequestDto dto = new OwnersRequestDto();
         dto.setName(model.name());
         dto.setEmail(model.email());
+        dto.setPhone(model.phone());
         dto.setPassword(model.password());
         return dto;
     }

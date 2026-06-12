@@ -37,6 +37,7 @@ public class OwnersService implements IOwnersService {
         Owners owner = new Owners();
         owner.setName(dto.getName());
         owner.setEmail(dto.getEmail());
+        owner.setPhone(dto.getPhone());
         owner.setPassword(dto.getPassword());
         return ownersRepository.addOwners(owner);
     }
@@ -48,6 +49,7 @@ public class OwnersService implements IOwnersService {
 
         owner.setName(dto.getName());
         owner.setEmail(dto.getEmail());
+        owner.setPhone(dto.getPhone());
         owner.setPassword(dto.getPassword());
 
         return ownersRepository.updateOwners(owner);

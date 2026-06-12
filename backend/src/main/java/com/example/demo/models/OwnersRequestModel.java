@@ -9,6 +9,8 @@ public record OwnersRequestModel(
         @NotBlank(message = "Email is required")
         @Email(message = "Email must be valid")
         String email,
+        @NotBlank(message = "Phone is required")
+        String phone,
         @NotBlank(message = "Password is required")
         String password) {
 }
