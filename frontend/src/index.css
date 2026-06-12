@@ -1,26 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Figtree:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 @theme {
-  --color-brand-teal: #7ad3d5;
-  --color-brand-teal-light: #b4ffff;
-  --color-brand-pink: #ff76b2;
-  --color-brand-pink-light: #ffc2dc;
-  --color-brand-pink-deep: #db2777;
+  /* Acentos */
+  --color-teal: #2db3ac;
+  --color-teal-deep: #1e8f8a;
+  --color-teal-soft: #e4f6f5;
+  --color-teal-mist: #eaf6f9;
+  --color-pink: #f76fa8;
+  --color-pink-deep: #e25490;
+  --color-pink-soft: #fde7f1;
+
+  /* Superficies y texto */
+  --color-surface: #ffffff;
+  --color-canvas: #fafdfd;
+  --color-canvas-deep: #e6f2f5;
+  --color-ink: #28424c;
+  --color-ink-soft: #7a949d;
+  --color-ink-faint: #a9bfc7;
+  --color-line: #e3eef1;
+  --color-line-soft: #edf4f6;
+  --color-chip: #f1f7f9;
+
+  /* Marca antigua (compat con código existente) */
+  --color-brand-teal: #2db3ac;
+  --color-brand-teal-light: #e4f6f5;
+  --color-brand-pink: #f76fa8;
+  --color-brand-pink-light: #fde7f1;
+  --color-brand-pink-deep: #e25490;
+
+  /* Familias */
+  --font-display: "Baloo 2", system-ui, sans-serif;
+  --font-sans: "Figtree", system-ui, sans-serif;
 }
 
 :root {
-  font-family: "Poppins", system-ui, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  color: #28424c;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  color: #0f172a;
-  /* Fondo sobrio: base off-white con un velo rosado muy sutil en la parte superior.
-     Mantiene el efecto glass (algo que desenfocar) sin el degradado "cotton candy". */
-  background:
-    radial-gradient(1100px 520px at 50% -12%, rgba(255, 118, 178, 0.14) 0%, rgba(255, 118, 178, 0) 60%),
-    #f6f8fa;
+  background: #e6f2f5;
   background-attachment: fixed;
+}
+
+::placeholder {
+  color: #a9bfc7;
+}
+
+/* Scrollbars discretos en carruseles horizontales */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Tipografía display */
+.font-display { font-family: var(--font-display); }
+
+/* Animaciones del diseño original */
+@keyframes screenIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes popIn { 0% { transform: scale(.6); opacity: 0; } 60% { transform: scale(1.08); } 100% { transform: scale(1); opacity: 1; } }
+@keyframes toastIn { from { opacity: 0; transform: translate(-50%, 14px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@keyframes floatBub { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+
+/* Shimmer para skeletons de carga */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.animate-shimmer {
+  animation: shimmer 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Fade-in suave para contenido que termina de cargar */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-fade-in {
+  animation: fadeInUp 0.35s ease-out both;
 }
