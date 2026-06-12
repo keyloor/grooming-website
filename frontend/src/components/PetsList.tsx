@@ -276,20 +276,21 @@ export function PetsList() {
               );
             })}
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <input
               placeholder="Raza (ej. Zaguate)"
               value={draft.breed}
               onChange={(e) => setDraft({ ...draft, breed: e.target.value })}
-              className="flex-1 rounded-xl border border-line bg-canvas px-3 py-3 text-sm focus:outline-none focus:border-teal"
+              className="flex-1 min-w-0 rounded-xl border border-line bg-canvas px-3 py-3 text-sm focus:outline-none focus:border-teal"
             />
             <input
               type="number"
               min={0}
-              placeholder="Edad"
+              inputMode="numeric"
+              placeholder="Edad (años)"
               value={draft.age || ""}
               onChange={(e) => setDraft({ ...draft, age: Number(e.target.value) })}
-              className="w-24 rounded-xl border border-line bg-canvas px-3 py-3 text-sm focus:outline-none focus:border-teal"
+              className="w-full sm:w-28 rounded-xl border border-line bg-canvas px-3 py-3 text-sm focus:outline-none focus:border-teal"
             />
           </div>
           <div className="flex gap-2">

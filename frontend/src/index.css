@@ -43,8 +43,13 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: #e6f2f5;
+  background-color: #fafdfd;
+  /* Dos círculos gradiente difusos (teal arriba-izq, pink abajo-der). Fijos al viewport. */
+  background-image:
+    radial-gradient(620px circle at 8% 12%, rgba(45, 179, 172, 0.22), transparent 60%),
+    radial-gradient(640px circle at 92% 88%, rgba(247, 111, 168, 0.20), transparent 62%);
   background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 ::placeholder {
