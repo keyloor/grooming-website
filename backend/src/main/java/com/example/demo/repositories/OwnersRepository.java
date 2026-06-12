@@ -7,4 +7,18 @@ import com.example.demo.entities.Owners;
 
 @Repository
 public interface OwnersRepository extends JpaRepository<Owners, Long> {
+
+	boolean existsByEmail(String email);
+
+	default java.util.List<Owners> getAll() {
+		return findAll();
+	}
+
+	default Owners addOwners(Owners owners) {
+		return save(owners);
+	}
+
+	default Owners updateOwners(Owners owners) {
+		return save(owners);
+	}
 }
