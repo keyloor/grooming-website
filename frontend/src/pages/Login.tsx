@@ -13,12 +13,19 @@ export function Login() {
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  const PHONE_REGEX = /^\+?\d{8,15}$/;
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setMessage(null);
     setError(null);
 
     if (isSignup) {
+      if (!PHONE_REGEX.test(phone)) {
+        setError("El teléfono debe tener entre 8 y 15 dígitos y puede comenzar con +.");
+        return;
+      }
+
       try {
         const newOwner = await signupOwner({ name, email, phone, password });
         setMessage(`Cuenta creada: ${newOwner.name}`);
@@ -86,6 +93,8 @@ export function Login() {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="Teléfono (para WhatsApp)"
+              pattern="^\+?\d{8,15}$"
+              title="Solo números, de 8 a 15 dígitos, opcional + al inicio"
               className="rounded-2xl border border-line bg-surface px-4 py-3.5 text-sm focus:outline-none focus:border-teal"
             />
           </>

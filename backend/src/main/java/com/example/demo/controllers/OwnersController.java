@@ -18,6 +18,8 @@ import com.example.demo.mappers.OwnersMapper;
 import com.example.demo.models.OwnersRequestModel;
 import com.example.demo.models.OwnersResponseModel;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/owners")
 public class OwnersController {
@@ -39,13 +41,13 @@ public class OwnersController {
     }
 
     @PostMapping
-    public ResponseEntity<OwnersResponseModel> add(@RequestBody OwnersRequestModel model) {
+    public ResponseEntity<OwnersResponseModel> add(@Valid @RequestBody OwnersRequestModel model) {
         var dto = ownersMapper.toOwnersRequestDto(model);
         return ResponseEntity.ok(ownersMapper.toOwnersResponseModel(ownersFacade.addOwner(dto)));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<OwnersResponseModel> update(@PathVariable Long id, @RequestBody OwnersRequestModel model) {
+    public ResponseEntity<OwnersResponseModel> update(@PathVariable Long id, @Valid @RequestBody OwnersRequestModel model) {
         var dto = ownersMapper.toOwnersRequestDto(model);
         return ResponseEntity.ok(ownersMapper.toOwnersResponseModel(ownersFacade.updateOwner(id, dto)));
     }
