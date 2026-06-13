@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Droplets, AlertCircle } from "lucide-react";
+import { PawPrint, AlertCircle } from "lucide-react";
 import type { Services } from "../models/Services";
 import { getServices } from "../services/ServicesService";
 import { ServiceRowSkeleton } from "./Skeleton";
@@ -92,7 +92,7 @@ export function ServiceList() {
             style={{ animationDelay: `${i * 50}ms` }}
           >
             <div className="w-12 h-12 rounded-2xl bg-teal-soft text-teal-deep flex items-center justify-center flex-shrink-0">
-              <Droplets className="w-5 h-5" strokeWidth={2} />
+              <PawPrint className="w-5 h-5" strokeWidth={2} />
             </div>
             <div className="flex-1 min-w-0">
               <h3 className="font-bold text-ink text-[15px] truncate">{s.name}</h3>

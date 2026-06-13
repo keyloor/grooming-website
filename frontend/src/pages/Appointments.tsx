@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { PawPrint, CalendarHeart, Droplets, Repeat } from "lucide-react";
+import { PawPrint, CalendarHeart, Repeat } from "lucide-react";
 
 // PLACEHOLDER: aún no hay GET /api/appointments cableado en el frontend.
 const upcoming = [
@@ -16,8 +16,8 @@ const upcoming = [
 ];
 
 const past = [
-  { id: 11, service: "Baño completo", detail: "Luna · 12 may", icon: Droplets },
-  { id: 12, service: "Corte de uñas", detail: "Mishi · 28 abr", icon: Droplets },
+  { id: 11, service: "Baño completo", detail: "Luna · 12 may", icon: PawPrint },
+  { id: 12, service: "Corte de uñas", detail: "Mishi · 28 abr", icon: PawPrint },
 ];
 
 export function Appointments() {

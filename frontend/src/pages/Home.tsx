@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
-  Scissors, PawPrint, CalendarHeart, Droplets, Sparkles, Plus, ArrowRight,
+  Scissors, PawPrint, CalendarHeart, Sparkles, Plus, ArrowRight,
 } from "lucide-react";
 import logo from "../assets/logo.webp";
 import type { Services } from "../models/Services";
@@ -157,7 +157,7 @@ export function Home() {
                 style={{ animationDelay: `${i * 60}ms` }}
               >
                 <div className="w-10 h-10 rounded-xl bg-teal-soft flex items-center justify-center">
-                  <Droplets className="w-5 h-5 text-teal-deep" strokeWidth={2} />
+                  <PawPrint className="w-5 h-5 text-teal-deep" strokeWidth={2} />
                 </div>
                 <div className="font-bold text-sm text-ink leading-tight">{s.name}</div>
                 <div className="text-xs text-ink-soft">{s.durationMin ?? 0} min</div>

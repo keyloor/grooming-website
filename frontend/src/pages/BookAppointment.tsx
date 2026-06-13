@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Droplets, Check } from "lucide-react";
+import { ArrowLeft, PawPrint, Check } from "lucide-react";
 import type { Services } from "../models/Services";
 import type { Pets } from "../models/Pets";
 import { getServices } from "../services/ServicesService";
@@ -148,7 +148,7 @@ export function BookAppointment() {
                     }`}
                   >
                     <div className="w-11 h-11 rounded-xl bg-teal-soft text-teal-deep grid place-items-center flex-shrink-0">
-                      <Droplets className="w-5 h-5" />
+                      <PawPrint className="w-5 h-5" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="font-bold text-ink text-[15px] truncate">{s.name}</div>
