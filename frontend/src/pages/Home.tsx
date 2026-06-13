@@ -7,6 +7,7 @@ import {
 import logo from "../assets/logo.webp";
 import type { Services } from "../models/Services";
 import { getServices } from "../services/ServicesService";
+import { getStoredOwner } from "../services/OwnersService";
 import { ServiceCardSkeleton } from "../components/Skeleton";
 
 const quickActions = [
@@ -27,6 +28,7 @@ const nextApt = {
 export function Home() {
   const [services, setServices] = useState<Services[]>([]);
   const [loading, setLoading] = useState(true);
+  const [firstName] = useState(() => getStoredOwner()?.name?.trim().split(" ")[0] ?? null);
 
   useEffect(() => {
     getServices()
@@ -57,8 +59,8 @@ export function Home() {
 
         <div className="relative flex flex-col-reverse sm:flex-row items-center gap-6 sm:gap-10">
           <div className="flex-1 flex flex-col gap-3 text-center sm:text-left">
-            <span className="text-xs text-ink-soft font-semibold uppercase tracking-wider">
-              Spa para mascotas en CR
+            <span className="font-display text-lg sm:text-xl font-semibold text-teal-deep">
+              {firstName ? `¡Hola, ${firstName}!` : "¡Bienvenido/a a Zagua!"}
             </span>
             <h1 className="font-display text-3xl sm:text-5xl font-semibold text-ink leading-tight">
               Cariño e higiene para tu mejor amigo
