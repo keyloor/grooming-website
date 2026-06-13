@@ -38,6 +38,12 @@ public class Pets {
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
+    @Column(name = "species", length = 50)
+    private String species;
+
+    @Column(name = "size", length = 50)
+    private String size;
+
     @Column(name = "age")
     private Integer age;
 

@@ -11,6 +11,8 @@ public interface IPetsFacade {
 
     PetsDto getById(Long id);
 
+    PetsDto addPets(PetsRequestDto dto);
+
     PetsDto updatePets(Long id, PetsRequestDto dto);
 
     void removePets(Long id);

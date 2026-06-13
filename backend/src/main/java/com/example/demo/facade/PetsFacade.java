@@ -33,6 +33,13 @@ public class PetsFacade implements IPetsFacade {
 
     @Override
     @Transactional
+    public PetsDto addPets(PetsRequestDto dto) {
+        var entity = petsService.create(dto);
+        return petsMapper.toPetsDto(entity);
+    }
+
+    @Override
+    @Transactional
     public PetsDto updatePets(Long id, PetsRequestDto dto) {
         var entity = petsService.updatePets(id, dto);
         return petsMapper.toPetsDto(entity);

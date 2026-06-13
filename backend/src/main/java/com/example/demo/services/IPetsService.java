@@ -11,6 +11,8 @@ public interface IPetsService {
 
     Pets getById(Long id);
 
+    Pets create(PetsRequestDto dto);
+
     Pets updatePets(Long id, PetsRequestDto dto);
 
     void removePets(Long id);

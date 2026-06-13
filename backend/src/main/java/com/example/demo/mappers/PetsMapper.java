@@ -20,6 +20,8 @@ public class PetsMapper {
         return new PetsDto(
                 pets.getId(),
                 pets.getName(),
+                pets.getSpecies(),
+                pets.getSize(),
                 pets.getAge(),
                 pets.getNotes(),
                 pets.getBreed() != null ? pets.getBreed().getName() : null,
@@ -40,6 +42,8 @@ public class PetsMapper {
         return new PetsResponseModel(
                 dto.id(),
                 dto.name(),
+                dto.species(),
+                dto.size(),
                 dto.age(),
                 dto.notes(),
                 dto.breedName(),
@@ -59,8 +63,11 @@ public class PetsMapper {
 
         PetsRequestDto dto = new PetsRequestDto();
         dto.setName(model.name());
+        dto.setSpecies(model.species());
+        dto.setSize(model.size());
         dto.setAge(model.age());
         dto.setNotes(model.notes());
+        dto.setBreedName(model.breedName());
         dto.setBreedId(model.breedId());
         dto.setOwnerId(model.ownerId());
         return dto;

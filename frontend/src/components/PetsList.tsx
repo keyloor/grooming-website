@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AlertCircle, Pencil, Trash2, Check, Plus } from "lucide-react";
 import type { Pets } from "../models/Pets";
-import { getPets, updatePets, deletePets } from "../services/PetsService";
+import { getPets, updatePets, deletePets, createPet } from "../services/PetsService";
+import { getStoredOwner, getOwners } from "../services/OwnersService";
 import { PetCardSkeleton } from "./Skeleton";
 
 // Colores para avatares (rotan por mascota)
@@ -26,15 +27,28 @@ export function PetsList() {
   const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
 
-  // Nueva mascota (PLACEHOLDER — todavía no hay POST en backend)
+  // Nueva mascota (REAL — usa backend POST /api/pets)
   const [showForm, setShowForm] = useState(false);
   const [draft, setDraft] = useState({ name: "", type: "Perro", breed: "", age: 0, size: "Mediano", notes: "" });
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+  const [ownerId, setOwnerId] = useState<number | null>(null);
 
   useEffect(() => {
     getPets()
       .then(setPets)
       .catch((err) => setError(err instanceof Error ? err.message : "Error desconocido"))
       .finally(() => setLoading(false));
+
+    // Resolver el perfil del cliente para asociar la mascota.
+    const stored = getStoredOwner();
+    if (stored) {
+      setOwnerId(stored.id);
+    } else {
+      getOwners()
+        .then((owners) => setOwnerId(owners[0]?.id ?? null))
+        .catch(() => setOwnerId(null));
+    }
   }, []);
 
   const flash = (msg: string) => {
@@ -70,11 +84,39 @@ export function PetsList() {
     }
   };
 
-  const handleSaveDraft = () => {
-    // PLACEHOLDER — sin backend
-    setShowForm(false);
+  const resetDraft = () =>
     setDraft({ name: "", type: "Perro", breed: "", age: 0, size: "Mediano", notes: "" });
-    flash("Guardado en placeholder (sin backend POST aún).");
+
+  const handleCreate = async () => {
+    if (!draft.name.trim()) {
+      setFormError("El nombre es obligatorio.");
+      return;
+    }
+    if (!ownerId) {
+      setFormError("No se encontró un perfil de cliente. Creá una cuenta primero.");
+      return;
+    }
+    setFormError(null);
+    setSubmitting(true);
+    try {
+      const created = await createPet({
+        name: draft.name.trim(),
+        species: draft.type,
+        size: draft.size,
+        breedName: draft.breed.trim() || undefined,
+        age: draft.age || null,
+        notes: draft.notes.trim() || undefined,
+        ownerId,
+      });
+      setPets((prev) => [created, ...prev]);
+      setShowForm(false);
+      resetDraft();
+      flash("¡Mascota registrada!");
+    } catch (e) {
+      setFormError(e instanceof Error ? e.message : "No se pudo registrar la mascota.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -142,7 +184,9 @@ export function PetsList() {
                 <div className="flex-1 min-w-0">
                   <h3 className="font-bold text-ink text-[15px] truncate">{pet.name}</h3>
                   <p className="text-xs text-ink-soft">
-                    {pet.breedName ?? "—"} · {pet.age} años
+                    {[pet.species, pet.breedName, pet.age ? `${pet.age} años` : null, pet.size]
+                      .filter(Boolean)
+                      .join(" · ") || "—"}
                   </p>
                   {pet.notes && (
                     <p className="text-xs text-pink-deep mt-1 italic line-clamp-2">
@@ -253,7 +297,7 @@ export function PetsList() {
         >
           <h3 className="font-bold text-ink">Nueva mascota</h3>
           <input
-            placeholder="Nombre"
+            placeholder="Nombre *"
             value={draft.name}
             onChange={(e) => setDraft({ ...draft, name: e.target.value })}
             className="rounded-xl border border-line bg-canvas px-3 py-3 text-sm focus:outline-none focus:border-teal"
@@ -318,24 +362,35 @@ export function PetsList() {
             onChange={(e) => setDraft({ ...draft, notes: e.target.value })}
             className="rounded-xl border border-line bg-canvas px-3 py-3 text-sm focus:outline-none focus:border-teal resize-none"
           />
+          {formError && (
+            <p className="text-xs text-pink-deep bg-pink-soft rounded-xl px-3 py-2">{formError}</p>
+          )}
           <div className="flex gap-2">
             <button
-              onClick={() => setShowForm(false)}
-              className="flex-1 py-3 rounded-full bg-chip text-ink-soft text-sm font-bold"
+              onClick={() => {
+                setShowForm(false);
+                setFormError(null);
+              }}
+              disabled={submitting}
+              className="flex-1 py-3 rounded-full bg-chip text-ink-soft text-sm font-bold disabled:opacity-50"
             >
               Cancelar
             </button>
             <button
-              onClick={handleSaveDraft}
-              className="flex-[1.4] py-3 rounded-full bg-teal text-white text-sm font-bold shadow-md shadow-teal/35"
+              onClick={handleCreate}
+              disabled={submitting || !draft.name.trim()}
+              className="flex-[1.4] py-3 rounded-full bg-teal text-white text-sm font-bold shadow-md shadow-teal/35 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Guardar
+              {submitting ? "Guardando…" : "Guardar"}
             </button>
           </div>
         </motion.div>
       ) : (
         <button
-          onClick={() => setShowForm(true)}
+          onClick={() => {
+            setFormError(null);
+            setShowForm(true);
+          }}
           className="w-full border-2 border-dashed border-teal/45 bg-transparent text-teal-deep rounded-2xl py-4 text-sm font-bold hover:bg-teal-soft transition-colors flex items-center justify-center gap-2"
         >
           <Plus className="w-4 h-4" strokeWidth={2.4} />

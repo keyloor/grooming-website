@@ -9,8 +9,11 @@ import lombok.*;
 public class PetsRequestDto {
 
     private String name;
+    private String species;
+    private String size;
     private Integer age;
     private String notes;
+    private String breedName;
     private Long breedId;
     private Long ownerId;
 }

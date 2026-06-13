@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import logo from "../assets/logo.webp";
-import { signupOwner } from "../services/OwnersService";
+import { signupOwner, setStoredOwner } from "../services/OwnersService";
 
 export function Login() {
   const [tab, setTab] = useState<"login" | "signup">("login");
@@ -28,6 +28,7 @@ export function Login() {
 
       try {
         const newOwner = await signupOwner({ name, email, phone, password });
+        setStoredOwner(newOwner);
         setMessage(`Cuenta creada: ${newOwner.name}`);
         setName("");
         setEmail("");

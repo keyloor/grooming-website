@@ -11,11 +11,23 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.example.demo.dtos.ErrorDto;
 import com.example.demo.exceptions.AppointmentNotFoundException;
+import com.example.demo.exceptions.OwnersNotFoundException;
+import com.example.demo.exceptions.PetsNotFoundException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(AppointmentNotFoundException.class)
     public ResponseEntity<ErrorDto> handleAppointmentNotFoundException(AppointmentNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDto(404, ex.getMessage()));
+    }
+
+    @ExceptionHandler(PetsNotFoundException.class)
+    public ResponseEntity<ErrorDto> handlePetsNotFoundException(PetsNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDto(404, ex.getMessage()));
+    }
+
+    @ExceptionHandler(OwnersNotFoundException.class)
+    public ResponseEntity<ErrorDto> handleOwnersNotFoundException(OwnersNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDto(404, ex.getMessage()));
     }
 
