@@ -1,39 +1,58 @@
-// cypress/e2e/delete-max-fixed.cy.js
+describe("Eliminar mascota", () => {
+  beforeEach(() => {
+    cy.intercept("GET", "**/api/pets", {
+      statusCode: 200,
+      body: [
+        {
+          id: 1,
+          name: "Max",
+          species: "Perro",
+          breedName: "Golden Retriever",
+          age: 8,
+          size: "Grande",
+          notes: "",
+          ownerId: 1,
+        },
+        {
+          id: 2,
+          name: "Rex",
+          species: "Perro",
+          breedName: "Pastor Alemán",
+          age: 3,
+          size: "Grande",
+          notes: "",
+          ownerId: 1,
+        },
+      ],
+    }).as("getPets");
 
-describe('Eliminar a Max', () => {
-  it('Debería eliminar a Max', () => {
-    // Interceptar API calls
-    cy.intercept('GET', '**/api/pets').as('getPets');
-    cy.intercept('DELETE', '**/api/pets/*').as('deletePet');
-    
-    // Visitar la página (URL CORRECTA con guión)
-    cy.visit('https://zagua-grooming.vercel.app/pets');
-    
-    // Esperar la carga de mascotas
-    cy.wait('@getPets', { timeout: 10000 })
-      .its('response.statusCode')
-      .should('eq', 200);
-    
-    // Verificar que Max existe (solo el nombre)
-    cy.contains('Max', { timeout: 10000 }).should('be.visible');
-    
-    // Verificar la raza y edad por separado (más flexible)
-    cy.contains('Golden Retriever').should('be.visible');
-    cy.contains('8 años').should('be.visible');
-    
-    // Hacer clic en el botón de ELIMINAR de Max (segundo botón eliminar)
-    cy.get('button[aria-label="Eliminar"]').eq(1).click({ force: true });
-    
-    // Confirmar eliminación
-    cy.contains('button', 'Sí, eliminar').click();
-    
-    // Esperar la solicitud DELETE
-    cy.wait('@deletePet', { timeout: 10000 });
-    
-    // Verificar que Max ya no existe
-    cy.contains('Max', { timeout: 5000 }).should('not.exist');
-    
-    // Verificar que Rex sigue presente
-    cy.contains('Rex').should('be.visible');
+    cy.intercept("GET", "**/api/owners", {
+      statusCode: 200,
+      body: [{ id: 1, name: "Oscar Gómez", phone: "88888888" }],
+    }).as("getOwners");
+
+    cy.intercept("DELETE", "**/api/pets/*", {
+      statusCode: 204,
+      body: {},
+    }).as("deletePet");
+  });
+
+  it("elimina a Max y mantiene a Rex", () => {
+    cy.visit("/pets");
+    cy.wait("@getPets");
+
+    cy.contains("Max").should("be.visible");
+    cy.contains("Golden Retriever").should("be.visible");
+    cy.contains("Rex").should("be.visible");
+
+    // Botón eliminar de la primera mascota (Max)
+    cy.get('button[aria-label="Eliminar"]').first().click();
+    cy.contains("button", "Sí, eliminar").click();
+
+    cy.wait("@deletePet");
+
+    cy.contains("¡Mascota eliminada!").should("be.visible");
+    cy.contains("Max").should("not.exist");
+    cy.contains("Rex").should("be.visible");
   });
 });
